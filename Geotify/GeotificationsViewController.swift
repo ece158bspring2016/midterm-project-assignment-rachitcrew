@@ -89,7 +89,7 @@ class GeotificationsViewController: UIViewController, AddGeotificationsViewContr
 
   // MARK: MKMapViewDelegate
 
-  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     let identifier = "myGeotification"
     if annotation is Geotification {
       var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
@@ -108,7 +108,7 @@ class GeotificationsViewController: UIViewController, AddGeotificationsViewContr
     return nil
   }
 
-  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
+  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
     if overlay is MKCircle {
       let circleRenderer = MKCircleRenderer(overlay: overlay)
       circleRenderer.lineWidth = 1.0
@@ -116,7 +116,7 @@ class GeotificationsViewController: UIViewController, AddGeotificationsViewContr
       circleRenderer.fillColor = UIColor.purpleColor().colorWithAlphaComponent(0.4)
       return circleRenderer
     }
-    return nil
+    return MKCircleRenderer();
   }
 
   func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

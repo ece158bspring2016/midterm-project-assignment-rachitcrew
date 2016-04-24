@@ -36,7 +36,7 @@ class AddGeotificationViewController: UITableViewController {
   }
 
   @IBAction func textFieldEditingChanged(sender: UITextField) {
-    addButton.enabled = !radiusTextField.text.isEmpty && !noteTextField.text.isEmpty
+    addButton.enabled = !radiusTextField.text!.isEmpty && !noteTextField.text!.isEmpty
   }
 
   @IBAction func onCancel(sender: AnyObject) {
@@ -45,11 +45,11 @@ class AddGeotificationViewController: UITableViewController {
 
   @IBAction private func onAdd(sender: AnyObject) {
     var coordinate = mapView.centerCoordinate
-    var radius = (radiusTextField.text as NSString).doubleValue
+    var radius = (radiusTextField.text! as NSString).doubleValue
     var identifier = NSUUID().UUIDString
     var note = noteTextField.text
     var eventType = (eventTypeSegmentedControl.selectedSegmentIndex == 0) ? EventType.OnEntry : EventType.OnExit
-    delegate!.addGeotificationViewController(self, didAddCoordinate: coordinate, radius: radius, identifier: identifier, note: note, eventType: eventType)
+    delegate!.addGeotificationViewController(self, didAddCoordinate: coordinate, radius: radius, identifier: identifier, note: note!, eventType: eventType)
   }
 
   @IBAction private func onZoomToCurrentLocation(sender: AnyObject) {
