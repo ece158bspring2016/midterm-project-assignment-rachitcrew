@@ -197,5 +197,16 @@ class GeotificationsViewController: UIViewController, AddGeotificationsViewContr
     }
   }
   
+  func locationManager(manager: CLLocationManager!, monitoringDidFailForRegion region: CLRegion!, withError error: NSError!)
+  {
+    print("Monitoring failed for region with identifier: \(region.identifier)")
+  }
+  
+  func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    print("Location Manager failed with the following error: \(error)")
+  }
+  
+  
+  
 }
 
