@@ -8,17 +8,21 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 let kSavedItemsKey = "savedItems"
 
-class GeotificationsViewController: UIViewController, AddGeotificationsViewControllerDelegate, MKMapViewDelegate {
+class GeotificationsViewController: UIViewController, AddGeotificationsViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
   @IBOutlet weak var mapView: MKMapView!
 
   var geotifications = [Geotification]()
-
+  let locationManager = CLLocationManager()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    locationManager.delegate = self
+    locationManager.requestAlwaysAuthorization()
     loadAllGeotifications()
   }
 
@@ -151,5 +155,9 @@ class GeotificationsViewController: UIViewController, AddGeotificationsViewContr
 
   @IBAction func zoomToCurrentLocation(sender: AnyObject) {
     zoomToUserLocationInMapView(mapView)
+  }
+  
+  func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+    mapView.showsUserLocation = (status == .AuthorizedAlways)
   }
 }
